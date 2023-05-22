@@ -1,9 +1,15 @@
+import java.awt.*;
+import javax.swing.*;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
-        System.out.println("Raahim is mad");
-        System.out.println("This is a test line");
-        System.out.println("Hello! This is my push code");
-        System.out.println("Ayesha is dumb");
+        Database.initialize();
+        Login_Form frame = new Login_Form();
+        frame.setVisible(true);
+        frame.setTitle("Log-In");
+        frame.pack();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(299,300);
+        frame.setLocationRelativeTo(null); // Center the frame
     }
 }
