@@ -6,8 +6,8 @@ import java.sql.Statement;
 public class Database {
     private static final String hostname = "localhost";
     private static final int port = 3306;
-    private static final String database = "scd_library_ass3";
-    private static final String username = "uni";
+    private static final String database = "library";
+    private static final String username = "root";
     private static final String password = "";
 
     public static Connection connect() {

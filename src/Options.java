@@ -77,5 +77,32 @@ public class Options extends JFrame {
                 vu.setLocationRelativeTo(null); // Center the frame
             }
         });
+
+        bt7.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+
+            ReturnBook rb = new ReturnBook();
+            rb.setVisible(true);
+            rb.setTitle("View Books");
+            rb.setSize(300, 300);
+            rb.setLocationRelativeTo(null); // Center the frame
+
+        }
+    });
+        bt8.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                Reset rs = new Reset();
+                rs.setVisible(true);
+                rs.setTitle("View Books");
+                rs.setSize(300, 300);
+                rs.setLocationRelativeTo(null); // Center the frame
+
+            }
+        });
+}
+        public static void main(String args[])
+        {
+
         }
 }
