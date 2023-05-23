@@ -2,24 +2,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-public class Add_Book extends JFrame {
-    Add_Book() {
+
+public class AddUser extends JFrame {
+    AddUser() {
         JPanel jp1 = new JPanel();
         jp1.setVisible(true);
         jp1.setSize(300, 300);
         /*JLabel lb2 = new JLabel("BID");*/
-        JLabel lb3 = new JLabel("BName");
-        JLabel lb4 = new JLabel("Genre");
-        JLabel lb5 = new JLabel("Price");
+        JLabel lb3 = new JLabel("Username");
+        JLabel lb5 = new JLabel("Name");
+        JLabel lb4 = new JLabel("Password");
         /*JTextField jtf1 = new JTextField(1);*/
         JTextField jtf2 = new JTextField(1);
         JTextField jtf3 = new JTextField(1);
         JTextField jtf4 = new JTextField(1);
-        JButton bt1 = new JButton("Add Book");
+        JButton bt1 = new JButton("Add User");
         jp1.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -30,9 +27,9 @@ public class Add_Book extends JFrame {
         constraints.gridy = 1;*/
         jp1.add(lb3, constraints);
         constraints.gridy = 1;
-        jp1.add(lb4, constraints);
-        constraints.gridy = 2;
         jp1.add(lb5, constraints);
+        constraints.gridy = 2;
+        jp1.add(lb4, constraints);
 
 
         constraints.gridx = 1;
@@ -58,25 +55,18 @@ public class Add_Book extends JFrame {
         add(jp1, BorderLayout.CENTER);
         bt1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               /* int bid = Integer.parseInt(jtf1.getText());*/
-                String name = jtf2.getText();
-                String genre = jtf3.getText();
-                int price = Integer.parseInt(jtf4.getText());
-
+                /* int bid = Integer.parseInt(jtf1.getText());*/
+                String username = jtf2.getText();
+                String name = jtf3.getText();
+                String password = jtf4.getText();
                 if (jtf2.getText().isEmpty() || jtf3.getText().isEmpty() || jtf4.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(Add_Book.this, "Please fill in all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(AddUser.this, "Please fill in all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                int Row=0;
-                Add_Book_DAO abd = new Add_Book_DAO();
-                abd.insertBook(Row,name,genre,price);
+                UserDao userDao = new UserDao();
+                userDao.create(username, name, password);
+                dispose();
             }
         });
+    }
 }
-}
-
-
-
-
-
-
