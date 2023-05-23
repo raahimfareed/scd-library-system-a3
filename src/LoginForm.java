@@ -2,8 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class Login_Form extends JFrame {
-    Login_Form() {
+
+public class LoginForm extends JFrame {
+    LoginForm() {
         JPanel jp1 = new JPanel();
         jp1.setVisible(true);
         jp1.setSize(300, 300);
@@ -12,6 +13,8 @@ public class Login_Form extends JFrame {
         JTextField jtf1 = new JTextField(1);
         JTextField jtf2 = new JPasswordField(1);
         JButton bt1 = new JButton("Login");
+        JButton signupButton = new JButton("Switch to Signup"); // New signup button
+
         jp1.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -25,7 +28,6 @@ public class Login_Form extends JFrame {
         constraints.gridy = 0;
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.weightx = 1.0;
-
         jp1.add(jtf1, constraints);
         constraints.gridy = 1;
         jp1.add(jtf2, constraints);
@@ -36,50 +38,44 @@ public class Login_Form extends JFrame {
         constraints.fill = GridBagConstraints.NONE;
 
         jp1.add(bt1, constraints);
+        constraints.gridy = 3;
+        jp1.add(signupButton, constraints); // Add signup button
+
         add(jp1, BorderLayout.CENTER);
+
+        // Switch to Signup form button action
+        signupButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Close the Login form
+                new Signup(); // Open the Signup form
+            }
+        });
+
+        // Login button action
         bt1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Validate the login credentials here
                 String username = jtf1.getText();
                 String password = jtf2.getText();
 
-                // Perform login validation logic
-                boolean isValid = validateLogin("Ayesha Amjad", "admin");
+                UserDao userDao = new UserDao();
+                String[] details = userDao.read(username);
 
-                if (isValid) {
-                    // If login is successful, navigate to the options class
+                if (details.length > 0 && details[1].equals(password)) {
+                    Config.logged_in = Integer.parseInt(details[2]);
                     Options options = new Options();
-                    options.setVisible(true);
-                    options.setTitle("Options");
-                    options.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    options.setSize(300, 300);
-                    options.setLocationRelativeTo(null); // Center the frame
-
-                    // Close the login form
                     dispose();
                 } else {
-                    // Show an error message for invalid login
-                    JOptionPane.showMessageDialog(Login_Form.this, "Invalid username or password", "Login Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(LoginForm.this, "Invalid username or password", "Login Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
-    }
 
-    // Simulate login validation logic
-    private boolean validateLogin(String username, String password) {
-        // Perform your login validation logic here
-        // Return true if the login is successful, false otherwise
-        return username.equals("Ayesha Amjad") && password.equals("admin");
-    }
-
-
-    public static void main(String[] args) {
-        Login_Form frame = new Login_Form();
-        frame.setVisible(true);
-        frame.setTitle("Log-In");
-        frame.pack();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300,300);
-        frame.setLocationRelativeTo(null); // Center the frame
+        setVisible(true);
+        setTitle("Log-In");
+        pack();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(299, 300);
+        setLocationRelativeTo(null);
     }
 }
