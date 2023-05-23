@@ -34,8 +34,7 @@ public class Database {
                     + "id INT AUTO_INCREMENT PRIMARY KEY,"
                     + "username VARCHAR(255) NOT NULL,"
                     + "name VARCHAR(255) NOT NULL,"
-                    + "password VARCHAR(255) NOT NULL,"
-                    + "admin INT NOT NULL"
+                    + "password VARCHAR(255) NOT NULL"
                     + ")";
             statement.executeUpdate(createUserTableQuery);
 
@@ -43,7 +42,6 @@ public class Database {
             String createBookTableQuery = "CREATE TABLE IF NOT EXISTS books ("
                     + "id INT AUTO_INCREMENT PRIMARY KEY,"
                     + "name VARCHAR(255) NOT NULL,"
-                    + "author VARCHAR(255) NOT NULL,"
                     + "genre VARCHAR(255) NOT NULL,"
                     + "price DECIMAL(10,2) NOT NULL,"
                     + "issued_to INT,"
